@@ -1,6 +1,6 @@
 import React from "react";
 import Table from "@material-ui/core/Table";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
@@ -25,21 +25,13 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-class FinancialAnalysisTable extends React.Component {
-  constructor() {
-    super();
-  }
-
+class FinancialCalculationResult extends React.Component {
   render() {
     const { classes, data } = this.props;
     return (
       <div className="space-y-6">
-        <p
-          className="max-w-min cursor-pointer underline text-2xl text-indigo-900 hover:text-purple-800"
-          onClick={this.props.handleBack}
-        >
-          Back
-        </p>
+        <p className="max-w-min cursor-pointer underline text-2xl text-indigo-900 hover:text-purple-800"
+          onClick={this.props.onBackChange} > Back  </p>
         <div>
           <p className="text-4xl mb-5 text-center">{data[0].companyName}</p>
           <TableContainer component={Paper}>
@@ -91,4 +83,4 @@ class FinancialAnalysisTable extends React.Component {
     );
   }
 }
-export default FinancialAnalysisTable;
+export default FinancialCalculationResult;

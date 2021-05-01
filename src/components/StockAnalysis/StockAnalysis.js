@@ -13,18 +13,18 @@ import DisplayChart from "./DisplayChart";
 
 const styles = (theme) => ({
   input: {
-    paddingLeft: "8px",
-    background: "#FFFFFF 0% 0% no-repeat padding-box",
-    border: "1px solid grey",
-    borderRadius: "5px",
     font: "normal normal 300 17px/35px Roboto",
     color: "grey",
     height: "40px",
     marginRight: "18px",
+    paddingLeft: "8px",
+    background: "#FFFFFF 0% 0% no-repeat padding-box",
+    border: "1px solid grey",
+    borderRadius: "5px",
   },
   select_root: {
-    margin: theme.spacing(1),
     minWidth: 120,
+    margin: theme.spacing(1),
   },
 });
 
@@ -196,8 +196,6 @@ class StockAnalysis extends React.Component {
       });
     }
   };
-
- 
 
   render() {
     const {
