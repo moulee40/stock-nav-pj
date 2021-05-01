@@ -106,7 +106,7 @@ class Overview extends React.Component {
       <div className="flex ml-2 flex-grow">
         {!shouldDisplayTable && (
           <div className="flex flex-col ml-14 mt-10">
-            <p className="text-3xl font-semibold text-gray-700">
+            <p className="text-2xl font-semibold text-gray-700">
               Information
             </p>
             <FormControl component="fieldset">
