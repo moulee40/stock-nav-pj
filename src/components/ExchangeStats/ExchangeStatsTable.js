@@ -35,7 +35,7 @@ class ExchangeStatsTable extends React.Component {
       <div className="space-y-6 ml-14">
 <Button size="large" onClick={handleBack}>Back</Button>
         <div>
-          <p className="text-4xl mb-5 text-gray-700 text-center">{data[0].companyName}</p>
+          <p className="text-4xl mb-5 text-gray-700 text-center">{data[0].company}</p>
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="customized table">
               <TableHead>
@@ -55,12 +55,12 @@ class ExchangeStatsTable extends React.Component {
                     <StyledTableCell component="th" scope="row">
                       {index}
                     </StyledTableCell>
-                    <StyledTableCell>{row.tradeDate}</StyledTableCell>
-                    <StyledTableCell>{row.openPrice}</StyledTableCell>
-                    <StyledTableCell>{row.closePrice}</StyledTableCell>
-                    <StyledTableCell>{row.highPrice}</StyledTableCell>
-                    <StyledTableCell>{row.lowPrice}</StyledTableCell>
-                    <StyledTableCell>{row.volume}</StyledTableCell>
+                    <StyledTableCell>{row.date}</StyledTableCell>
+                    <StyledTableCell>{row.open}</StyledTableCell>
+                    <StyledTableCell>{row.close}</StyledTableCell>
+                    <StyledTableCell>{row.high}</StyledTableCell>
+                    <StyledTableCell>{row.low}</StyledTableCell>
+                    <StyledTableCell>{row.volumeTraded}</StyledTableCell>
                   </TableRow>
                 ))}
               </TableBody>

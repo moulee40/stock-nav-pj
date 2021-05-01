@@ -43,9 +43,9 @@ const theme = createMuiTheme({
 
 });
 
-const stockQuarterAnalysisUrl = "http://localhost:8080/stockapp/getCurrentQuarterDetail/";
-const stockPriceComparisonUrl = "http://localhost:8080/stockapp/getComparisonDetail/";
-const stockTrendUrl = "http://localhost:8080/stockapp/getMovingAverageDetail/";
+const stockQuarterAnalysisUrl = "http://localhost:8080//stockapp/analysis/currrentQuarter/";
+const stockPriceComparisonUrl = "http://localhost:8080/stockapp/analysis/compare/";
+const stockTrendUrl = "http://localhost:8080/stockapp/analysis/movingAverage/";
 
 class StockAnalysis extends React.Component {
 
@@ -132,17 +132,19 @@ class StockAnalysis extends React.Component {
         validationMessage: "Please enter the Stock Code",
       });
     } else {
-      const finalUrl = stockQuarterAnalysisUrl.concat(stockQuarterAnalysisInput);
-      axios.get(finalUrl).then((res) => {
+      const params = {
+        symbol: stockQuarterAnalysisInput,
+      };
+      axios.get(stockQuarterAnalysisUrl,{params}).then((res) => {
         if (!res.data.error) {
           this.setState({
-            stockQuarterAnalysisResult: res.data.currentQuarterDetail,
+            stockQuarterAnalysisResult: res.data.qnarterReport,
             displayChart: true,
             stockQuarterAnalysisChart: true,
           });
         } else {
           this.setState({
-            validationMessage: res.data.error,
+            validationMessage: res.data.errorMessage,
           });
         }
       });
@@ -157,19 +159,19 @@ class StockAnalysis extends React.Component {
       });
     } else {
       const params = {
+        symbol:stockTrendInput,
         years: stockYearInput,
       };
-      const finalUrl = stockTrendUrl.concat(stockTrendInput);
-      axios.get(finalUrl, { params }).then((res) => {
-        if (!res.data.error) {
+      axios.get(stockTrendUrl, { params }).then((res) => {
+        if (!res.data.errorMessage) {
           this.setState({
-            stockTrendResult: res.data.movingAverageDetail,
+            stockTrendResult: res.data.companyMovingAvgData,
             displayChart: true,
             stockTrendChart: true,
           });
         } else {
           this.setState({
-            validationMessage: res.data.error,
+            validationMessage: res.data.errorMessage,
           });
         }
       });
@@ -194,18 +196,21 @@ class StockAnalysis extends React.Component {
         validationMessage: "Please enter the Stock Code 2",
       });
     } else {
-      const finalUrl = stockPriceComparisonUrl.concat(stockSymbol1Input).concat("/").concat(stockSymbol2Input);
-      axios.get(finalUrl).then((res) => {
-        if (!res.data.error) {
+      const params = {
+        symbol1: stockSymbol1Input,
+        symbol2: stockSymbol2Input,
+      };
+      axios.get(stockPriceComparisonUrl,{params}).then((res) => {
+        if (!res.data.errorMessage) {
           this.setState({
-            stockSymbol1Result: res.data.symbol1,
-            stockSymbol2Result: res.data.symbol2,
+            stockSymbol1Result: res.data.company1,
+            stockSymbol2Result: res.data.company2,
             displayChart: true,
             stockPriceComparisonGraph: true,
           });
         } else {
           this.setState({
-            validationMessage: res.data.error,
+            validationMessage: res.data.errorMessage,
           });
         }
       });

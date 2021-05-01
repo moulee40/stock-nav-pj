@@ -38,18 +38,18 @@ class OverviewTable extends React.Component {
       classes,
     } = this.props;
     const summaryTableArray = [
-      { name: "Company Name", key: "companyName" },
+      { name: "Company Name", key: "company" },
       { name: "Company Symbol", key: "symbol" },
-      { name: "Exchange", key: "exchange" },
-      { name: "Start Date", key: "startDate" },
-      { name: "End Date", key: "endDate" },
+      { name: "Exchange", key: "market" },
+      { name: "Start Date", key: "startdate" },
+      { name: "End Date", key: "enddate" },
       shouldHighestPriceChecked && {
         name: "Highest Price and Date",
-        key: "highestPriceAndDate",
+        key: "highestPriceWithDate",
       },
       shouldHighestVolumeChecked && {
         name: "Highest Volume and Date",
-        key: "highestVolumeAndDate",
+        key: "highestVolumeWithDate",
       },
     ];
     return (
