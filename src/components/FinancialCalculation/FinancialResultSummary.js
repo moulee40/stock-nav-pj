@@ -8,7 +8,7 @@ class FinancialResultSummary extends React.Component {
   
     const { classes,onBackChange,chartData,resultData,displayChart,financialChart,financialResult } = this.props;
     return (
-      <div className="flex ml-2 flex-grow  shadow-xl">
+      <div className="flex ml-2 flex-grow">
         {displayChart && financialChart && (
           <div className="flex flex-col justify-center mt-10 space-y-2 w-2/4">
             <FinancialCalculationChart onBackChange={onBackChange} data={chartData} />

@@ -223,7 +223,7 @@ class StockAnalysis extends React.Component {
       <div className="flex ml-2 flex-grow w-2/6">
         {!displayChart && (
           <div className="flex flex-col ml-14 mt-10 flex-grow">
-            <p className="text-3xl font-semibold text-gray-700">
+            <p className="text-2xl font-semibold text-gray-700">
               Stock Comparison
             </p>
             <div className="flex items-center mt-5 ml-6">
@@ -256,7 +256,7 @@ class StockAnalysis extends React.Component {
                 Submit
               </Button>
             </div>
-            <p className="text-3xl font-semibold text-gray-700 mt-8">
+            <p className="text-2xl font-semibold text-gray-700 mt-8">
               Quarter Analysis
             </p>
             <div className="mt-5 ml-6 flex items-center">
@@ -286,7 +286,7 @@ class StockAnalysis extends React.Component {
                 Submit
               </Button>
             </div>
-            <p className="text-3xl font-semibold text-gray-700 mt-8">
+            <p className="text-2xl font-semibold text-gray-700 mt-8">
               Stock Trend
             </p>
             <div>

@@ -185,7 +185,7 @@ class FinancialCalculation extends React.Component {
       <div className="flex ml-2 flex-grow">
         {!displayChart && (
           <div className="flex flex-col ml-14 mt-10 ">
-            <p className="text-3xl font-semibold text-gray-700">
+            {/* <p className="text-3xl font-semibold text-gray-700">
               Financial Chart Result
             </p>
             <div className="flex  ml-6 mt-5">
@@ -227,8 +227,8 @@ class FinancialCalculation extends React.Component {
               >
                 Submit
               </Button>
-            </div>
-            <p className="text-3xl font-semibold text-gray-700 mt-8">
+            </div> */}
+            <p className="text-2xl font-semibold text-gray-700 ">
               Financial Result Summary
             </p>
             <div className="flex mt-5 ml-6">

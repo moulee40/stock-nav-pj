@@ -7,6 +7,8 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import Button from '@material-ui/core/Button';
+
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.common.black,
@@ -29,9 +31,8 @@ class FinancialCalculationResult extends React.Component {
   render() {
     const { classes, data } = this.props;
     return (
-      <div className="space-y-6">
-        <p className="max-w-min cursor-pointer underline text-2xl text-indigo-900 hover:text-purple-800"
-          onClick={this.props.onBackChange} > Back  </p>
+      <div className="space-y-6 ml-14">
+          <Button size="large" onClick={this.props.onBackChange}>Back</Button>
         <div>
           <p className="text-4xl mb-5 text-center">{data[0].companyName}</p>
           <TableContainer component={Paper}>
