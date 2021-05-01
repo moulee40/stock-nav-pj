@@ -14,7 +14,17 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
+    display: 'flex',
     
+  },
+  appBar_root:{
+    width: '25%',
+    boxShadow: 'none',
+    
+  },
+  tab_root:{
+    fontSize:'25px',
+    marginBottom:'20px'
   }
 });
 
@@ -33,12 +43,12 @@ class SimpleTabs extends React.Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static">
-          <Tabs className={classes.root} value={value} onChange={this.handleChange} centered textColor="primary" indicatorColor="primary">
-            <Tab  label="Summary" href="#basic-tabs"/>
-            <Tab  label="Statistics" href="#basic-tabs"/>
-            <Tab label="Analysis" href="#basic-tabs" />
-            <Tab label="Financial" href="#basic-tabs" />
+        <AppBar position="static" className={classes.appBar_root}>
+          <Tabs orientation="vertical" className={classes.root} value={value} onChange={this.handleChange} centered textColor="primary">
+            <Tab className={classes.tab_root} label="Summary" href="#basic-tabs"/>
+            <Tab className={classes.tab_root} label="Statistics" href="#basic-tabs"/>
+            <Tab className={classes.tab_root} label="Analysis" href="#basic-tabs" />
+            <Tab className={classes.tab_root} label="Financial" href="#basic-tabs" />
           </Tabs>
         </AppBar>
         {value === 0 && <Summary/>}

@@ -198,9 +198,9 @@ class Financial extends React.Component {
     } = this.state;
     const { classes } = this.props;
     return (
-      <div className="flex justify-center">
+      <div className="flex ml-2 flex-grow  shadow-xl">
         {!isShouldDisplayGraph && (
-          <div className="flex flex-col justify-center mt-10 ">
+          <div className="flex flex-col ml-14 mt-10 ">
             <p className="text-2xl font-semibold text-indigo-900">
               Financial Chart
             </p>
