@@ -6,8 +6,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Summary from './Summary';
 import Statistics from './Statistics';
-import Analysis from './Analysis';
-import Financial from './Financial';
+import StockAnalysis from './StockAnalysis';
+import FinancialCalculation from './FinancialCalculation';
 
 
 const styles = theme => ({
@@ -53,8 +53,8 @@ class SimpleTabs extends React.Component {
         </AppBar>
         {value === 0 && <Summary/>}
         {value === 1 && <Statistics/>}
-        {value === 2 && <Analysis/>}
-        {value === 3 && <Financial/>}
+        {value === 2 && <StockAnalysis/>}
+        {value === 3 && <FinancialCalculation/>}
       </div>
     );
   }

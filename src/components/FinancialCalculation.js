@@ -46,7 +46,7 @@ const styles = (theme) => ({
     width: 200,
   },
 });
-class Financial extends React.Component {
+class FinancialCalculation extends React.Component {
   constructor() {
     super();
   }
@@ -324,4 +324,4 @@ class Financial extends React.Component {
   }
 }
 
-export default withStyles(styles)(Financial);
+export default withStyles(styles)(FinancialCalculation);

@@ -3,12 +3,12 @@ import CanvasJSReact from "./canvasjs.react";
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-class StockComparisonChart extends React.Component {
+class StockPriceComparisonChart extends React.Component {
   constructor() {
     super();
-    this.toggleDataSeries = this.toggleDataSeries.bind(this);
+    this.graphDataSeries = this.graphDataSeries.bind(this);
   }
-  toggleDataSeries(e) {
+  graphDataSeries(e) {
     if (typeof e.dataSeries.visible === "undefined" || e.dataSeries.visible) {
       e.dataSeries.visible = false;
     } else {
@@ -16,45 +16,40 @@ class StockComparisonChart extends React.Component {
     }
     this.chart.render();
   }
-  state = {};
-  handleSymbolData1() {
-    const finalData = [];
-    const data1 = this.props.data1;
-    data1.map((data) => {
+
+  stockSymbol1Data() {
+    const resultData = [];
+    const stockSymbol1Data = this.props.data1;
+    stockSymbol1Data.map((data) => {
       let openPrice = data.openPrice;
-      let highPrice = data.highPrice;
-      let lowPrice = data.lowPrice;
-      let closePrice = data.closePrice;
       let date = new Date(data.tradeDate);
-      let tempData = { x: date, y: openPrice };
-      finalData.push(tempData);
+      let jsonData = { x: date, y: openPrice };
+      resultData.push(jsonData);
     });
-    return finalData;
+    return resultData;
   }
-  handleSymbolData2() {
-    const finalData = [];
-    const data2 = this.props.data2;
-    data2.map((data) => {
+  stockSymbol2Data() {
+    const resultData = [];
+    const stockSymbol2Data = this.props.data2;
+    stockSymbol2Data.map((data) => {
       let openPrice = data.openPrice;
-      let highPrice = data.highPrice;
-      let lowPrice = data.lowPrice;
-      let closePrice = data.closePrice;
       let date = new Date(data.tradeDate);
-      let tempData = { x: date, y: openPrice };
-      finalData.push(tempData);
+      let jsonData = { x: date, y: openPrice };
+      resultData.push(jsonData);
     });
-    return finalData;
+    return resultData;
   }
+
   render() {
-    const data1 = this.props.data1;
-    const data2 = this.props.data2;
-    const stock1 = data1[0].companyName;
-    const stock2 = data2[0].companyName;
+    const stockSymbol1Data = this.props.data1;
+    const stockSymbol2Data = this.props.data2;
+    const company1 = stockSymbol1Data[0].companyName;
+    const company2 = stockSymbol2Data[0].companyName;
     const data = {
       animationEnabled: true,
       colorSet: "colorSet2",
       title: {
-        text: stock1.concat(" vs ").concat(stock2),
+        text: company1.concat(" vs ").concat(company2),
       },
       axisX: {
         valueFormatString: "MMMM-YYYY",
@@ -69,41 +64,37 @@ class StockComparisonChart extends React.Component {
       },
       legend: {
         cursor: "pointer",
-        itemclick: this.toggleDataSeries,
+        itemclick: this.graphDataSeries,
         verticalAlign: "top",
       },
       data: [
         {
           type: "line",
-          name: stock1,
+          name: company1,
           showInLegend: true,
           xValueFormatString: "MMMM-YYYY",
           yValueFormatString: "$###0.00",
-          dataPoints: this.handleSymbolData1(),
+          dataPoints: this.stockSymbol1Data(),
         },
         {
           type: "line",
-          name: stock2,
+          name: company2,
           showInLegend: true,
           xValueFormatString: "MMMM-YYYY",
           yValueFormatString: "$###0.00",
-          dataPoints: this.handleSymbolData2(),
+          dataPoints: this.stockSymbol2Data(),
         },
       ],
     };
 
     return (
       <div className="space-y-6">
-        <p
-          className="max-w-min cursor-pointer underline text-2xl text-indigo-900 hover:text-purple-800"
-          onClick={this.props.handleBack}
-        >
-          Back
-        </p>
+        <p className="max-w-min cursor-pointer underline text-2xl text-indigo-900 hover:text-purple-800"
+          onClick={this.props.onBackChange} > Back  </p>
         <CanvasJSChart options={data} onRef={(ref) => (this.chart = ref)} />
       </div>
     );
   }
 }
 
-export default StockComparisonChart;
+export default StockPriceComparisonChart;

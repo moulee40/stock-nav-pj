@@ -3,13 +3,13 @@ import CanvasJSReact from "./canvasjs.react";
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-class QuarterAnalysisChart extends React.Component {
+class StockQuarterAnalysisChart extends React.Component {
   constructor() {
     super();
-    this.toggleDataSeries = this.toggleDataSeries.bind(this);
+    this.graphDataSeries = this.graphDataSeries.bind(this);
   }
 
-  toggleDataSeries(e) {
+  graphDataSeries(e) {
     if (typeof e.dataSeries.visible === "undefined" || e.dataSeries.visible) {
       e.dataSeries.visible = false;
     } else {
@@ -18,33 +18,32 @@ class QuarterAnalysisChart extends React.Component {
     this.chart.render();
   }
 
-  handleQuarterAnalysisData() {
-    const finalData = [];
-    const quarterAnalysisData = this.props.data;
-    quarterAnalysisData.map((data) => {
+  stockQuarterAnalysisResult() {
+    const resultData = [];
+    const stockQuarterAnalysisResultData = this.props.data;
+    stockQuarterAnalysisResultData.map((data) => {
       let openPrice = data.openPrice;
       let highPrice = data.highPrice;
       let lowPrice = data.lowPrice;
       let closePrice = data.closePrice;
       let date = new Date(data.tradeDate);
-      let tempData = {
+      let jsonData = {
         x: date,
         y: [openPrice, highPrice, lowPrice, closePrice],
       };
-      finalData.push(tempData);
+      resultData.push(jsonData);
     });
-    return finalData;
+    return resultData;
   }
 
   render() {
-    const quarterAnalysisData = this.props.data;
-
-    const options = {
+    const stockQuarterAnalysisResultData = this.props.data;
+    const data = {
       theme: "light2",
       animationEnabled: true,
       exportEnabled: true,
       title: {
-        text: quarterAnalysisData[0].companyName,
+        text: stockQuarterAnalysisResultData[0].companyName,
       },
       axisX: {
         valueFormatString: "MMMM-YYYY",
@@ -58,24 +57,20 @@ class QuarterAnalysisChart extends React.Component {
         {
           type: "candlestick",
           showInLegend: true,
-          name: quarterAnalysisData[0].companyName,
+          name: stockQuarterAnalysisResultData[0].companyName,
           yValueFormatString: "$###0.00",
           xValueFormatString: "MMMM-YYYY",
-          dataPoints: this.handleQuarterAnalysisData(),
+          dataPoints: this.stockQuarterAnalysisResult(),
         },
       ],
     };
     return (
       <div className="space-y-6">
-        <p
-          className="max-w-min cursor-pointer underline text-2xl text-indigo-900 hover:text-purple-800"
-          onClick={this.props.handleBack}
-        >
-          Back
-        </p>
-        <CanvasJSChart options={options} onRef={(ref) => (this.chart = ref)} />
+        <p className="max-w-min cursor-pointer underline text-2xl text-indigo-900 hover:text-purple-800" 
+        onClick={this.props.onBackChange} > Back </p>
+        <CanvasJSChart options={data} onRef={(ref) => (this.chart = ref)} />
       </div>
     );
   }
 }
-export default QuarterAnalysisChart;
+export default StockQuarterAnalysisChart;
