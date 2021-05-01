@@ -4,8 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Summary from './Summary';
-import Statistics from './Statistics';
+import Overview from './Overview';
+import ExchangeStats from './ExchangeStats';
 import StockAnalysis from './StockAnalysis';
 import FinancialCalculation from './FinancialCalculation';
 
@@ -51,8 +51,8 @@ class SimpleTabs extends React.Component {
             <Tab className={classes.tab_root} label="Financial" href="#basic-tabs" />
           </Tabs>
         </AppBar>
-        {value === 0 && <Summary/>}
-        {value === 1 && <Statistics/>}
+        {value === 0 && <Overview/>}
+        {value === 1 && <ExchangeStats/>}
         {value === 2 && <StockAnalysis/>}
         {value === 3 && <FinancialCalculation/>}
       </div>
