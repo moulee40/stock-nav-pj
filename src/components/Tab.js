@@ -4,10 +4,10 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Overview from './Overview';
-import ExchangeStats from './ExchangeStats';
-import StockAnalysis from './StockAnalysis';
-import FinancialCalculation from './FinancialCalculation';
+import Overview from './Overview/Overview';
+import ExchangeStats from './ExchangeStats/ExchangeStats';
+import StockAnalysis from './StockAnalysis/StockAnalysis';
+import FinancialCalculation from './FinancialCalculation/FinancialCalculation';
 
 
 const styles = theme => ({
