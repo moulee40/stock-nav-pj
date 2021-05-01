@@ -3,12 +3,12 @@ import CanvasJSReact from "./canvasjs.react";
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-class MovingAverageChart extends React.Component {
+class StockTrendChart extends React.Component {
   constructor() {
     super();
-    this.toggleDataSeries = this.toggleDataSeries.bind(this);
+    this.grapgDataSeries = this.grapgDataSeries.bind(this);
   }
-  toggleDataSeries(e) {
+  grapgDataSeries(e) {
     if (typeof e.dataSeries.visible === "undefined" || e.dataSeries.visible) {
       e.dataSeries.visible = false;
     } else {
@@ -18,41 +18,41 @@ class MovingAverageChart extends React.Component {
   }
   state = {};
 
-  handleActualPriceData() {
-    const finalData = [];
-    const movingAverageData = this.props.data;
-    movingAverageData.map((data) => {
+  actualStockPriceResult() {
+    const resultData = [];
+    const stockTrendResultData = this.props.data;
+    stockTrendResultData.map((data) => {
       let date = new Date(data.tradeDate);
-      let tempData = { x: date, y: data.price };
-      finalData.push(tempData);
+      let jsonData = { x: date, y: data.price };
+      resultData.push(jsonData);
     });
-    return finalData;
+    return resultData;
   }
 
-  handle50DaysAverageData() {
-    const finalData = [];
-    const movingAverageData = this.props.data;
-    movingAverageData.map((data) => {
+  fiftyDaysAverageResult() {
+    const resultData = [];
+    const stockTrendResultData = this.props.data;
+    stockTrendResultData.map((data) => {
       let date = new Date(data.tradeDate);
-      let tempData = { x: date, y: data.fiftyDayAverage };
-      finalData.push(tempData);
+      let jsonData = { x: date, y: data.fiftyDayAverage };
+      resultData.push(jsonData);
     });
-    return finalData;
+    return resultData;
   }
 
-  handle200DaysAverageData() {
-    const finalData = [];
-    const movingAverageData = this.props.data;
-    movingAverageData.map((data) => {
+  twoHundredDaysAverageResult() {
+    const resultData = [];
+    const stockTrendResultData = this.props.data;
+    stockTrendResultData.map((data) => {
       let date = new Date(data.tradeDate);
-      let tempData = { x: date, y: data.twoHundredDayAverage };
-      finalData.push(tempData);
+      let jsonData = { x: date, y: data.twoHundredDayAverage };
+      resultData.push(jsonData);
     });
-    return finalData;
+    return resultData;
   }
   render() {
     const { fiftyDaysAverage, twoHundredDaysAverage } = this.props;
-    const movingAverageData = this.props.data;
+    const stockTrendResultData = this.props.data;
 
     const actualPriceData = {
       type: "line",
@@ -60,7 +60,7 @@ class MovingAverageChart extends React.Component {
       showInLegend: true,
       xValueFormatString: "MMMM-YYYY",
       yValueFormatString: "$#,##0",
-      dataPoints: this.handleActualPriceData(),
+      dataPoints: this.actualStockPriceResult(),
     };
 
     const fiftyDaysAverageData = {
@@ -69,7 +69,7 @@ class MovingAverageChart extends React.Component {
       showInLegend: true,
       xValueFormatString: "MMMM-YYYY",
       yValueFormatString: "$#,##0",
-      dataPoints: this.handle50DaysAverageData(),
+      dataPoints: this.fiftyDaysAverageResult(),
     };
     const twoHundredDaysAverageData = {
       type: "line",
@@ -79,14 +79,14 @@ class MovingAverageChart extends React.Component {
       showInLegend: true,
       xValueFormatString: "MMMM-YYYY",
       yValueFormatString: "$#,##0",
-      dataPoints: this.handle200DaysAverageData(),
+      dataPoints: this.twoHundredDaysAverageResult(),
     };
 
     const data = {
       animationEnabled: true,
       colorSet: "colorSet2",
       title: {
-        text: movingAverageData[0].companyName,
+        text: stockTrendResultData[0].companyName,
       },
       axisX: {
         valueFormatString: "MMMM-YYYY",
@@ -99,7 +99,7 @@ class MovingAverageChart extends React.Component {
       },
       legend: {
         cursor: "pointer",
-        itemclick: this.toggleDataSeries,
+        itemclick: this.grapgDataSeries,
         verticalAlign: "top",
       },
       data: [
@@ -111,16 +111,12 @@ class MovingAverageChart extends React.Component {
 
     return (
       <div className="space-y-6">
-        <p
-          className="max-w-min cursor-pointer underline text-2xl text-indigo-900 hover:text-purple-800"
-          onClick={this.props.handleBack}
-        >
-          Back
-        </p>
+        <p className="max-w-min cursor-pointer underline text-2xl text-indigo-900 hover:text-purple-800"
+          onClick={this.props.onBackChange} > Back </p>
         <CanvasJSChart options={data} onRef={(ref) => (this.chart = ref)} />
       </div>
     );
   }
 }
 
-export default MovingAverageChart;
+export default StockTrendChart;

@@ -1,4 +1,3 @@
-import './App.css';
 import './index.css'
 import Main from './components/Main'
 
