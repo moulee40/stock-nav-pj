@@ -21,8 +21,8 @@ class StockPriceComparisonChart extends React.Component {
     const resultData = [];
     const stockSymbol1Data = this.props.data1;
     stockSymbol1Data.map((data) => {
-      let openPrice = data.openPrice;
-      let date = new Date(data.tradeDate);
+      let openPrice = data.open;
+      let date = new Date(data.date);
       let jsonData = { x: date, y: openPrice };
       resultData.push(jsonData);
     });
@@ -32,8 +32,8 @@ class StockPriceComparisonChart extends React.Component {
     const resultData = [];
     const stockSymbol2Data = this.props.data2;
     stockSymbol2Data.map((data) => {
-      let openPrice = data.openPrice;
-      let date = new Date(data.tradeDate);
+      let openPrice = data.open;
+      let date = new Date(data.date);
       let jsonData = { x: date, y: openPrice };
       resultData.push(jsonData);
     });
@@ -43,21 +43,21 @@ class StockPriceComparisonChart extends React.Component {
   render() {
     const stockSymbol1Data = this.props.data1;
     const stockSymbol2Data = this.props.data2;
-    const company1 = stockSymbol1Data[0].companyName;
-    const company2 = stockSymbol2Data[0].companyName;
+    const company1 = stockSymbol1Data[0].company;
+    const company2 = stockSymbol2Data[0].company;
     const data = {
       animationEnabled: true,
-      colorSet: "colorSet2",
+      theme: "dark2",
       title: {
         text: company1.concat(" vs ").concat(company2),
       },
       axisX: {
-        valueFormatString: "MMMM-YYYY",
+        valueFormatString: "MMM-YYYY",
       },
       axisY: {
         includeZero: false,
         prefix: "$",
-        title: "Price (in USD)",
+        title: "Price",
       },
       toolTip: {
         shared: true,
@@ -72,7 +72,7 @@ class StockPriceComparisonChart extends React.Component {
           type: "line",
           name: company1,
           showInLegend: true,
-          xValueFormatString: "MMMM-YYYY",
+          xValueFormatString: "MMM-YYYY",
           yValueFormatString: "$###0.00",
           dataPoints: this.stockSymbol1Data(),
         },

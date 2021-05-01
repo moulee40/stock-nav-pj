@@ -42,9 +42,7 @@ const theme = createMuiTheme({
 
 });
 
-//eg:http://localhost:8080/stockapp/getStatisticsDetail/AAPL?pastDaysCount=5&exchange=NASDAQ
-
-const statisticsBaseUrl = "http://localhost:8080/stockapp/getStatisticsDetail/";
+const statisticsBaseUrl = "http://localhost:8080/stock/statistics/";
 
 class ExchangeStats extends React.Component {
   state = {
@@ -72,17 +70,17 @@ class ExchangeStats extends React.Component {
       });
     } else {
       const params = {
-        pastDaysCount: displayCount,
-        exchange: exchangeStatValue,
+        days: displayCount,
+        market: exchangeStatValue,
       };
       axios.get(`${statisticsBaseUrl}${stockCode}`, { params }).then((res) => {
-        if (res.data.error) {
+        if (res.data.errorMessage) {
           this.setState({
-            alertMessage: res.data.error,
+            alertMessage: res.data.errorMessage,
           });
         } else {
           this.setState({
-            exchangeStatTableData: res.data.statisticsDetail,
+            exchangeStatTableData: res.data.companyStatisticData,
             shouldDisplayTable: true,
             alertMessage: "",
           });

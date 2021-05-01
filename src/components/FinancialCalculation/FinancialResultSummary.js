@@ -5,7 +5,7 @@ class FinancialResultSummary extends React.Component {
 
   render() {
   
-    const { classes,onBackChange,chartData,resultData,displayChart,financialChart,financialResult } = this.props;
+    const { classes,onBackChange,resultData,displayChart,financialResult } = this.props;
     return (
       <div className="flex ml-2 flex-grow">
         {displayChart && financialResult && (

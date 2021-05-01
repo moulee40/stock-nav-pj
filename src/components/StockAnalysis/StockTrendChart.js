@@ -21,7 +21,7 @@ class StockTrendChart extends React.Component {
     const resultData = [];
     const stockTrendResultData = this.props.data;
     stockTrendResultData.map((data) => {
-      let date = new Date(data.tradeDate);
+      let date = new Date(data.date);
       let jsonData = { x: date, y: data.price };
       resultData.push(jsonData);
     });
@@ -32,8 +32,8 @@ class StockTrendChart extends React.Component {
     const resultData = [];
     const stockTrendResultData = this.props.data;
     stockTrendResultData.map((data) => {
-      let date = new Date(data.tradeDate);
-      let jsonData = { x: date, y: data.fiftyDayAverage };
+      let date = new Date(data.date);
+      let jsonData = { x: date, y: data.fiftyDayAvg };
       resultData.push(jsonData);
     });
     return resultData;
@@ -43,8 +43,8 @@ class StockTrendChart extends React.Component {
     const resultData = [];
     const stockTrendResultData = this.props.data;
     stockTrendResultData.map((data) => {
-      let date = new Date(data.tradeDate);
-      let jsonData = { x: date, y: data.twoHundredDayAverage };
+      let date = new Date(data.date);
+      let jsonData = { x: date, y: data.twoHundredDayAvg };
       resultData.push(jsonData);
     });
     return resultData;
@@ -54,7 +54,7 @@ class StockTrendChart extends React.Component {
     const stockTrendResultData = this.props.data;
 
     const actualPriceData = {
-      type: "line",
+      type: "area",
       name: "Actual Price",
       showInLegend: true,
       xValueFormatString: "MMMM-YYYY",
@@ -83,15 +83,16 @@ class StockTrendChart extends React.Component {
 
     const data = {
       animationEnabled: true,
-      colorSet: "colorSet2",
+      theme: "dark2",
       title: {
-        text: stockTrendResultData[0].companyName,
+        text: stockTrendResultData[0].company,
       },
       axisX: {
-        valueFormatString: "MMMM-YYYY",
+        valueFormatString: "MMM-YYYY",
       },
       axisY: {
         prefix: "$",
+        title: "Price",
       },
       toolTip: {
         shared: true,

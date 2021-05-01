@@ -19,13 +19,6 @@ const StyledTableCell = withStyles((theme) => ({
   },
 }))(TableCell);
 
-// const StyledTableRow = withStyles((theme) => ({
-//   root: {
-//     "&:nth-of-type(odd)": {
-//       backgroundColor: theme.palette.action.hover,
-//     },
-//   },
-// }))(TableRow);
 
 class FinancialCalculationResult extends React.Component {
   render() {
@@ -34,7 +27,7 @@ class FinancialCalculationResult extends React.Component {
       <div className="space-y-6 ml-14">
           <Button size="large" onClick={this.props.onBackChange}>Back</Button>
         <div>
-          <p className="text-4xl mb-5 text-gray-700 text-center">{data[0].companyName}</p>
+          <p className="text-4xl mb-5 text-gray-700 text-center">{data[0].company}</p>
           <TableContainer component={Paper}>
             <Table aria-label="customized table">
               <TableHead>
@@ -57,18 +50,18 @@ class FinancialCalculationResult extends React.Component {
                     <StyledTableCell component="th" scope="row">
                       {row.symbol}
                     </StyledTableCell>
-                    <StyledTableCell align="center">{row.year}</StyledTableCell>
+                    <StyledTableCell align="center">{row.tradeYear}</StyledTableCell>
                     <StyledTableCell align="center">
-                      {row.month}
+                      {row.tradeMonth}
                     </StyledTableCell>
                     <StyledTableCell align="center">
-                      {row.glPerShare}
+                      {row.gainLossPerShare}
                     </StyledTableCell>
                     <StyledTableCell align="center">
-                      {row.lotSize}
+                      {row.allocatedLotSize}
                     </StyledTableCell>
                     <StyledTableCell align="center">
-                      {row.glPerLot}
+                      {row.gainLossPerLot}
                     </StyledTableCell>
                   </TableRow>
                 ))}

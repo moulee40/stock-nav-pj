@@ -38,7 +38,7 @@ const theme = createMuiTheme({
   },
 });
 
-const summaryBaseUrl = "http://localhost:8080/stockapp/getSummaryDetail/";
+const summaryBaseUrl = "http://localhost:8080/stock/summary/";
 
 class Overview extends React.Component {
   state = {
@@ -58,13 +58,13 @@ class Overview extends React.Component {
       });
     } else {
       axios.get(`${summaryBaseUrl}${stockCode}`).then((res) => {
-        if (res.data.error) {
+        if (res.data.errorMessage) {
           this.setState({
-            alertMessage: res.data.error,
+            alertMessage: res.data.errorMessage,
           });
         } else {
           this.setState({
-            overviewTableData: res.data.summaryDetail,
+            overviewTableData: res.data.dataForSummaryPage,
             shouldDisplayTable: true,
             alertMessage: "",
           });

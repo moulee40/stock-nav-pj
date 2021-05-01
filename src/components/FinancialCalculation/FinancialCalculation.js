@@ -40,8 +40,8 @@ const theme = createMuiTheme({
   },
 });
 
-const financialCalculationChartUrl = "http://localhost:8080/stockapp/getFinancialReportDetail/";
-const financialCalculationResultUrl = "http://localhost:8080/stockapp/getMonthlyFinancialDetail/";
+const financialCalculationChartUrl = "http://localhost:8080/stock/financial/range/";
+const financialCalculationResultUrl = "http://localhost:8080/stock/financial/monthly/";
 
 class FinancialCalculation extends React.Component {
   
@@ -125,9 +125,9 @@ class FinancialCalculation extends React.Component {
       });
     } else {
       const params = {
-        fromDate: resultFromDate,
-        toDate: resultToDate,
-        lotSize: resultQuantityInput,
+        fromdate: resultFromDate,
+        todate: resultToDate,
+        allocatedLotSize: resultQuantityInput,
       };
       const tableAnalysisUrl = financialCalculationResultUrl.concat(resultInput);
       axios.get(tableAnalysisUrl, { params }).then((res) => {
@@ -154,8 +154,8 @@ class FinancialCalculation extends React.Component {
       });
     } else {
       const params = {
-        fromDate: chartFromDate,
-        toDate: chartToDate,
+        fromdate: chartFromDate,
+        todate: chartToDate,
       };
       const finalUrl = financialCalculationChartUrl.concat(chartInput);
       axios.get(finalUrl, { params }).then((res) => {
@@ -189,7 +189,7 @@ class FinancialCalculation extends React.Component {
             </p>
             <div className="flex mt-5 ml-6">
               <form className={classes.form_input} noValidate>
-                <span className="text-xl mr-7">From</span>
+                <span className="text-xl mr-7">From Date</span>
                 <TextField
                   id="date"
                   type="date"
@@ -199,7 +199,7 @@ class FinancialCalculation extends React.Component {
                 />
               </form>
               <form className={classes.form_input} noValidate>
-                <span className="text-xl mr-4">To</span>
+                <span className="text-xl mr-4">To Date</span>
                 <TextField
                   id="date"
                   type="date"

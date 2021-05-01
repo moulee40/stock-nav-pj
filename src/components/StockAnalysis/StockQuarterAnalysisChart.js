@@ -21,11 +21,11 @@ class StockQuarterAnalysisChart extends React.Component {
     const resultData = [];
     const stockQuarterAnalysisResultData = this.props.data;
     stockQuarterAnalysisResultData.map((data) => {
-      let openPrice = data.openPrice;
-      let highPrice = data.highPrice;
-      let lowPrice = data.lowPrice;
-      let closePrice = data.closePrice;
-      let date = new Date(data.tradeDate);
+      let openPrice = data.open;
+      let highPrice = data.high;
+      let lowPrice = data.low;
+      let closePrice = data.close;
+      let date = new Date(data.date);
       let jsonData = {
         x: date,
         y: [openPrice, highPrice, lowPrice, closePrice],
@@ -38,27 +38,27 @@ class StockQuarterAnalysisChart extends React.Component {
   render() {
     const stockQuarterAnalysisResultData = this.props.data;
     const data = {
-      theme: "light2",
+      theme: "dark2",
       animationEnabled: true,
       exportEnabled: true,
       title: {
-        text: stockQuarterAnalysisResultData[0].companyName,
+        text: stockQuarterAnalysisResultData[0].company,
       },
       axisX: {
-        valueFormatString: "MMMM-YYYY",
+        valueFormatString: "MMM-YYYY",
       },
       axisY: {
         includeZero: false,
         prefix: "$",
-        title: "Price (in USD)",
+        title: "Price",
       },
       data: [
         {
           type: "candlestick",
           showInLegend: true,
-          name: stockQuarterAnalysisResultData[0].companyName,
+          name: stockQuarterAnalysisResultData[0].company,
           yValueFormatString: "$###0.00",
-          xValueFormatString: "MMMM-YYYY",
+          xValueFormatString: "MMM-YYYY",
           dataPoints: this.stockQuarterAnalysisResult(),
         },
       ],
