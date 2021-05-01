@@ -9,9 +9,7 @@ import { withStyles } from "@material-ui/core/styles";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import StockQuarterAnalysisChart from "./StockQuarterAnalysisChart";
-import StockTrendChart from "./StockTrendChart";
-import StockPriceComparisonChart from "./StockPriceComparisonChart";
+import DisplayChart from "./DisplayChart";
 
 const styles = (theme) => ({
   input: {
@@ -116,7 +114,7 @@ class StockAnalysis extends React.Component {
     const { stockQuarterAnalysisInput } = this.state;
     if (stockQuarterAnalysisInput === "") {
       this.setState({
-        validationMessage: "Please enter the Symbol and click Submit",
+        validationMessage: "Please enter the Stock Code",
       });
     } else {
       const finalUrl = stockQuarterAnalysisUrl.concat(stockQuarterAnalysisInput);
@@ -140,7 +138,7 @@ class StockAnalysis extends React.Component {
     const { stockTrendInput, stockYearInput } = this.state;
     if (stockTrendInput === "") {
       this.setState({
-        validationMessage: "Please enter the Symbol and click Submit",
+        validationMessage: "Please enter the Stock Code",
       });
     } else {
       const params = {
@@ -170,15 +168,15 @@ class StockAnalysis extends React.Component {
     } = this.state;
     if (stockSymbol1Input === "" && stockSymbol2Input === "") {
       this.setState({
-        validationMessage: "Please enter the Symbol 1 and Symbol 2 and click Submit",
+        validationMessage: "Please enter the Stock Code 1 and Stock Code",
       });
     } else if (stockSymbol1Input === "") {
       this.setState({
-        validationMessage: "Please enter the Symbol 1 and click Submit",
+        validationMessage: "Please enter the Stock Code 1",
       });
     } else if (stockSymbol2Input === "") {
       this.setState({
-        validationMessage: "Please enter the Symbol 2 and click Submit",
+        validationMessage: "Please enter the Stock Code 2",
       });
     } else {
       const finalUrl = stockPriceComparisonUrl.concat(stockSymbol1Input).concat("/").concat(stockSymbol2Input);
@@ -329,33 +327,11 @@ class StockAnalysis extends React.Component {
             )}
           </div>
         )}
-        {displayChart && stockQuarterAnalysisChart && (
-          <div className="flex flex-col justify-center mt-10 space-y-2 w-2/4">
-            <StockQuarterAnalysisChart
-              onBackChange={this.onBackChange}
-              data={stockQuarterAnalysisResult}
-            />
-          </div>
-        )}
-        {displayChart && stockTrendChart && (
-          <div className="flex flex-col justify-center mt-10 space-y-2 w-2/4">
-            <StockTrendChart
-              onBackChange={this.onBackChange}
-              fiftyDaysAverage={fiftyDaysSelected}
-              twoHundredDaysAverage={twoHundredDaysSelected}
-              data={stockTrendResult}
-            />
-          </div>
-        )}
-        {displayChart && stockPriceComparisonGraph && (
-          <div className="flex flex-col justify-center mt-10 space-y-2 w-2/4">
-            <StockPriceComparisonChart
-              onBackChange={this.onBackChange}
-              data1={stockSymbol1Result}
-              data2={stockSymbol2Result}
-            />
-          </div>
-        )}
+        <DisplayChart onBackChange={this.onBackChange} display={displayChart}  stockQuarterAnalysisDisplay={stockQuarterAnalysisChart} 
+        stockTrendDisplay={stockTrendChart} stockPriceComparisonDisplay={stockPriceComparisonGraph} 
+        stockQuarterAnalysisdata={stockQuarterAnalysisResult} fiftyDaysAverage={fiftyDaysSelected}
+        twoHundredDaysAverage={twoHundredDaysSelected}  stockTrendData={stockTrendResult}
+        stockSymbolData1={stockSymbol1Result} stockSymbolData2={stockSymbol2Result}></DisplayChart>
       </div>
     );
   }

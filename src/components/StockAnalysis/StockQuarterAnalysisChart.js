@@ -1,7 +1,5 @@
 import React from "react";
-import CanvasJSReact from "../canvasjs.react";
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+import CanvasChart from "./CanvasChart"
 
 class StockQuarterAnalysisChart extends React.Component {
   constructor() {
@@ -68,7 +66,7 @@ class StockQuarterAnalysisChart extends React.Component {
       <div className="space-y-6">
         <p className="max-w-min cursor-pointer underline text-2xl text-indigo-900 hover:text-purple-800" 
         onClick={this.props.onBackChange} > Back </p>
-        <CanvasJSChart options={data} onRef={(ref) => (this.chart = ref)} />
+        <CanvasChart resultData={data} />
       </div>
     );
   }
