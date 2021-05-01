@@ -7,6 +7,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import Button from '@material-ui/core/Button';
 
 const styles = (theme) => ({
   table: {
@@ -16,7 +17,7 @@ const styles = (theme) => ({
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: '#6b7280',
     color: theme.palette.common.white,
   },
   body: {
@@ -24,13 +25,6 @@ const StyledTableCell = withStyles((theme) => ({
   },
 }))(TableCell);
 
-const StyledTableRow = withStyles((theme) => ({
-  root: {
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover,
-    },
-  },
-}))(TableRow);
 
 class ExchangeStatsTable extends React.Component {
 
@@ -39,14 +33,9 @@ class ExchangeStatsTable extends React.Component {
 
     return (
       <div className="space-y-6 ml-14">
-        <p
-          className="max-w-min cursor-pointer underline text-2xl text-indigo-900 hover:text-purple-800"
-          onClick={handleBack}
-        >
-          Back
-        </p>
+<Button size="large" onClick={handleBack}>Back</Button>
         <div>
-          <p className="text-4xl mb-5 text-center">{data[0].companyName}</p>
+          <p className="text-4xl mb-5 text-gray-700 text-center">{data[0].companyName}</p>
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="customized table">
               <TableHead>
@@ -62,7 +51,7 @@ class ExchangeStatsTable extends React.Component {
               </TableHead>
               <TableBody>
                 {data.map((row, index) => (
-                  <StyledTableRow key={index}>
+                  <TableRow key={index}>
                     <StyledTableCell component="th" scope="row">
                       {index}
                     </StyledTableCell>
@@ -72,7 +61,7 @@ class ExchangeStatsTable extends React.Component {
                     <StyledTableCell>{row.highPrice}</StyledTableCell>
                     <StyledTableCell>{row.lowPrice}</StyledTableCell>
                     <StyledTableCell>{row.volume}</StyledTableCell>
-                  </StyledTableRow>
+                  </TableRow>
                 ))}
               </TableBody>
             </Table>

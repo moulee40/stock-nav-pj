@@ -7,6 +7,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import Button from '@material-ui/core/Button';
 
 const styles = (theme) => ({
   table: {
@@ -16,7 +17,7 @@ const styles = (theme) => ({
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: "#6b7280",
     color: theme.palette.common.white,
   },
   body: {
@@ -24,13 +25,6 @@ const StyledTableCell = withStyles((theme) => ({
   },
 }))(TableCell);
 
-const StyledTableRow = withStyles((theme) => ({
-  root: {
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover,
-    },
-  },
-}))(TableRow);
 
 class OverviewTable extends React.Component {
   state = {};
@@ -60,12 +54,7 @@ class OverviewTable extends React.Component {
     ];
     return (
       <div className="space-y-12 ml-14">
-        <p
-          className="max-w-min cursor-pointer underline text-2xl text-indigo-900 hover:text-purple-800"
-          onClick={handleBack}
-        >
-          Back
-        </p>
+        <Button size="large" onClick={handleBack}>Back</Button>
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="customized table">
             <TableHead>
@@ -78,12 +67,12 @@ class OverviewTable extends React.Component {
               {summaryTableArray
                 .filter((row) => row)
                 .map((row, index) => (
-                  <StyledTableRow key={index}>
+                  <TableRow key={index}>
                     <StyledTableCell component="th" scope="row">
                       {row.name}
                     </StyledTableCell>
                     <StyledTableCell>{data[row.key]}</StyledTableCell>
-                  </StyledTableRow>
+                  </TableRow>
                 ))}
             </TableBody>
           </Table>

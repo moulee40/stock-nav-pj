@@ -5,11 +5,13 @@ import NativeSelect from "@material-ui/core/NativeSelect";
 import Alert from "@material-ui/lab/Alert";
 import Button from "@material-ui/core/Button";
 import { Input } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles,ThemeProvider,createMuiTheme } from "@material-ui/core/styles";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import DisplayChart from "./DisplayChart";
+import { grey } from '@material-ui/core/colors';
+import TextField from '@material-ui/core/TextField';
 
 const styles = (theme) => ({
   input: {
@@ -26,6 +28,19 @@ const styles = (theme) => ({
     minWidth: 120,
     margin: theme.spacing(1),
   },
+  root_textfield:{
+    marginRight: "14px"
+  },
+  root_textfield_stock1:{
+    width:'76%'
+  }
+});
+
+const theme = createMuiTheme({
+  palette: {
+    primary: grey,
+  },
+
 });
 
 const stockQuarterAnalysisUrl = "http://localhost:8080/stockapp/getCurrentQuarterDetail/";
@@ -168,7 +183,7 @@ class StockAnalysis extends React.Component {
     } = this.state;
     if (stockSymbol1Input === "" && stockSymbol2Input === "") {
       this.setState({
-        validationMessage: "Please enter the Stock Code 1 and Stock Code",
+        validationMessage: "Please enter the Stock Code 1 and Stock Code 2",
       });
     } else if (stockSymbol1Input === "") {
       this.setState({
@@ -204,30 +219,73 @@ class StockAnalysis extends React.Component {
       stockQuarterAnalysisChart,stockTrendChart,stockPriceComparisonGraph} = this.state;
     const { classes } = this.props;
     return (
-      <div className="flex ml-2 flex-grow">
+      <div className="flex ml-2 flex-grow w-2/6 ">
         {!displayChart && (
-          <div className="flex flex-col ml-14 mt-10">
-            <p className="text-2xl font-semibold text-indigo-900">
+          <div className="flex flex-col ml-14 mt-10 flex-grow">
+            <p className="text-3xl font-semibold text-gray-700">
+              Stock Comparison
+            </p>
+            <div className="flex items-center mt-5 ml-6">
+            <ThemeProvider theme={theme}>
+            <TextField
+                onChange={this.stockSymbol1InputChange}
+                value={stockSymbol1Input}
+                className={classes.root_textfield_stock1}
+                label="Stock Code 1"
+                variant="outlined"
+             />
+             </ThemeProvider>
+            </div>
+            <div className="flex items-center mt-4 ml-6">
+            <ThemeProvider theme={theme}>
+            <TextField
+                onChange={this.stockSymbol2InputChange}
+                fullWidth
+                value={stockSymbol2Input}
+                className={classes.root_textfield}
+                label="Stock Code 2"
+                variant="outlined"
+             />
+             </ThemeProvider>
+              <Button
+                variant="contained"
+                size="large"
+                onClick={this.onStockPriceComparisonSubmit}
+              >
+                Submit
+              </Button>
+            </div>
+            <p className="text-3xl font-semibold text-gray-700 mt-8">
               Quarter Analysis
             </p>
             <div className="mt-5 ml-6 flex items-center">
-              <span className="text-xl mr-4">Stock Code</span>
+              {/* <span className="text-xl mr-4">Stock Code</span>
               <Input
                 classes={{ root: classes.input }}
                 value={stockQuarterAnalysisInput}
                 onChange={this.stockQuarterAnalysisInputChange}
                 autoFocus
                 disableUnderline
-              />
+              /> */}
+            <ThemeProvider theme={theme}>
+            <TextField
+                onChange={this.stockQuarterAnalysisInputChange}
+                fullWidth
+                value={stockQuarterAnalysisInput}
+                className={classes.root_textfield}
+                label="Stock Code"
+                variant="outlined"
+             />
+             </ThemeProvider>
               <Button
                 variant="contained"
-                color="primary"
+                size="large"
                 onClick={this.onStockQuarterAnalysisSubmit}
               >
                 Submit
               </Button>
             </div>
-            <p className="text-2xl font-semibold text-indigo-900 mt-8">
+            <p className="text-3xl font-semibold text-gray-700 mt-8">
               Stock Trend
             </p>
             <div>
@@ -253,7 +311,7 @@ class StockAnalysis extends React.Component {
                       checked={fiftyDaysSelected}
                       onChange={this.stockTrendChange}
                       name="fiftyDays Average"
-                      color="primary"
+                      color="default"
                     />
                   }
                   label="50 Days Moving Average"
@@ -264,72 +322,45 @@ class StockAnalysis extends React.Component {
                       checked={twoHundredDaysSelected}
                       onChange={this.stockTrendChange}
                       name="200Days Average"
-                      color="primary"
+                      color="default"
                     />
                   }
                   label="200 Days Moving Average"
                 />
               </FormGroup>
-              <div className="flex items-center mt-4">
-                <span className="text-xl mr-4 ml-6">Stock Code</span>
-                <Input
-                  classes={{ root: classes.input }}
-                  value={stockTrendInput}
-                  onChange={this.stockTrendInputChange}
-                  autoFocus
-                  disableUnderline
-                />
+              <div className="flex items-center mt-4 ml-6">
+            <ThemeProvider theme={theme}>
+            <TextField
+                onChange={this.stockTrendInputChange}
+                fullWidth
+                value={stockTrendInput}
+                className={classes.root_textfield}
+                label="Stock Code"
+                variant="outlined"
+             />
+             </ThemeProvider>
                 <Button
                   variant="contained"
-                  color="primary"
+                  size="large"
                   onClick={this.onStockTrendSubmit}
                 >
                   Submit
                 </Button>
               </div>
             </div>
-            <p className="text-2xl font-semibold text-indigo-900 mt-8">
-              Stock Comparison
-            </p>
-            <div className="flex items-center mt-5 ml-6">
-              <span className="text-xl mr-4">Stock Code 1</span>
-              <Input
-                classes={{ root: classes.input }}
-                value={stockSymbol1Input}
-                onChange={this.stockSymbol1InputChange}
-                autoFocus
-                disableUnderline
-              />
-            </div>
-            <div className="flex items-center mt-4 ml-6">
-              <span className="text-xl mr-4">Stock Code 2</span>
-              <Input
-                classes={{ root: classes.input }}
-                value={stockSymbol2Input}
-                onChange={this.stockSymbol2InputChange}
-                autoFocus
-                disableUnderline
-              />
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={this.onStockPriceComparisonSubmit}
-              >
-                Submit
-              </Button>
-            </div>
+
             {validationMessage !== "" && (
-              <Alert className="mt-5" severity="warning">
+              <Alert className="mt-5" severity="error">
                 {validationMessage}
               </Alert>
             )}
           </div>
         )}
-        <DisplayChart onBackChange={this.onBackChange} display={displayChart}  stockQuarterAnalysisDisplay={stockQuarterAnalysisChart} 
+        {displayChart && <DisplayChart onBackChange={this.onBackChange} display={displayChart}  stockQuarterAnalysisDisplay={stockQuarterAnalysisChart} 
         stockTrendDisplay={stockTrendChart} stockPriceComparisonDisplay={stockPriceComparisonGraph} 
         stockQuarterAnalysisdata={stockQuarterAnalysisResult} fiftyDaysAverage={fiftyDaysSelected}
         twoHundredDaysAverage={twoHundredDaysSelected}  stockTrendData={stockTrendResult}
-        stockSymbolData1={stockSymbol1Result} stockSymbolData2={stockSymbol2Result}></DisplayChart>
+        stockSymbolData1={stockSymbol1Result} stockSymbolData2={stockSymbol2Result}></DisplayChart>}
       </div>
     );
   }
