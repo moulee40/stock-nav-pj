@@ -13,7 +13,7 @@ class DisplayChart extends React.Component {
     const { classes,onBackChange,display,stockQuarterAnalysisDisplay,stockQuarterAnalysisdata,stockTrendDisplay,stockPriceComparisonDisplay,
         fiftyDaysAverage,twoHundredDaysAverage,stockTrendData,stockSymbolData1,stockSymbolData2} = this.props;
     return (
-      <div className="flex ml-2 flex-grow shadow-xl">
+      <div className="flex ml-2 flex-grow w-2/6">
         {display && stockQuarterAnalysisDisplay && (
           <div className="flex flex-col justify-center mt-10 space-y-2 w-2/4">
             <StockQuarterAnalysisChart onBackChange={onBackChange} data={stockQuarterAnalysisdata} />

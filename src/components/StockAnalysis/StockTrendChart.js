@@ -1,5 +1,6 @@
 import React from "react";
-import CanvasChart from "./CanvasChart"
+import CanvasChart from "./CanvasChart";
+import Button from '@material-ui/core/Button';
 
 class StockTrendChart extends React.Component {
   constructor() {
@@ -109,8 +110,7 @@ class StockTrendChart extends React.Component {
 
     return (
       <div className="space-y-6">
-        <p className="max-w-min cursor-pointer underline text-2xl text-indigo-900 hover:text-purple-800"
-          onClick={this.props.onBackChange} > Back </p>
+        <Button size="large" onClick={this.props.onBackChange}>Back</Button>
         <CanvasChart resultData={data} />
       </div>
     );
