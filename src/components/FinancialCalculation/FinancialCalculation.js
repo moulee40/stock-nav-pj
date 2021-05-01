@@ -4,8 +4,9 @@ import TextField from "@material-ui/core/TextField";
 import axios from "axios";
 import Alert from "@material-ui/lab/Alert";
 import { Input } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles,ThemeProvider,createMuiTheme } from "@material-ui/core/styles";
 import FinancialResultSummary from "./FinancialResultSummary";
+import { grey } from '@material-ui/core/colors';
 
 const styles = (theme) => ({
   input: {
@@ -28,6 +29,15 @@ const styles = (theme) => ({
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
     width: 200,
+  },
+  root_textfield:{
+    marginRight: "14px"
+  }
+});
+
+const theme = createMuiTheme({
+  palette: {
+    primary: grey,
   },
 });
 
@@ -175,7 +185,7 @@ class FinancialCalculation extends React.Component {
       <div className="flex ml-2 flex-grow">
         {!displayChart && (
           <div className="flex flex-col ml-14 mt-10 ">
-            <p className="text-2xl font-semibold text-indigo-900">
+            <p className="text-3xl font-semibold text-gray-700">
               Financial Chart Result
             </p>
             <div className="flex  ml-6 mt-5">
@@ -200,24 +210,25 @@ class FinancialCalculation extends React.Component {
                 />
               </form>
             </div>
-            <div className="ml-6 mt-6">
-              <span className="text-xl mr-4">Stock Code</span>
-              <Input
-                classes={{ root: classes.input }}
+            <div className="ml-6 mt-6 flex items-center">
+            <ThemeProvider theme={theme}>
+            <TextField
                 onChange={this.chartInputChange}
                 value={chartInput}
-                autoFocus
-                disableUnderline
-              />
+                className={classes.root_textfield}
+                label="Stock Code"
+                variant="outlined"
+             />
+             </ThemeProvider>
               <Button
                 variant="contained"
-                color="primary"
+                size="large"
                 onClick={this.financialChart}
               >
                 Submit
               </Button>
             </div>
-            <p className="text-2xl font-semibold text-indigo-900 mt-8">
+            <p className="text-3xl font-semibold text-gray-700 mt-8">
               Financial Result Summary
             </p>
             <div className="flex mt-5 ml-6">
@@ -244,42 +255,44 @@ class FinancialCalculation extends React.Component {
             </div>
 
             <div className="ml-6 mt-6">
-              <span className="text-xl mr-4">Stock Code</span>
-              <Input
-                classes={{ root: classes.input }}
+            <ThemeProvider theme={theme}>
+            <TextField
                 onChange={this.resultInputChange}
                 value={resultInput}
-                autoFocus
-                disableUnderline
-              />
+                className={classes.root_textfield}
+                label="Stock Code"
+                variant="outlined"
+             />
+             </ThemeProvider>
             </div>
-            <div className="ml-6 mt-6">
-              <span className="text-xl mr-4">Quantity</span>
-              <Input
-                classes={{ root: classes.input }}
-                value={resultQuantityInput}
+            <div className="ml-6 mt-6 flex items-center">
+            <ThemeProvider theme={theme}>
+            <TextField
                 onChange={this.resultQuantityInputChange}
-                autoFocus
-                disableUnderline
-              />
+                value={resultQuantityInput}
+                className={classes.root_textfield}
+                label="Quantity"
+                variant="outlined"
+             />
+             </ThemeProvider>
               <Button
                 variant="contained"
-                color="primary"
+                size="large"
                 onClick={this.financialResult}
               >
                 Submit
               </Button>
             </div>
             {validationMessage !== "" && (
-              <Alert className="mt-5" severity="warning">
+              <Alert className="mt-5" severity="error">
                 {validationMessage}
               </Alert>
             )}
           </div>
         )}
-        <FinancialResultSummary onBackChange={this.onBackChange} chartData={chartData} resultData={resultData}
+       {displayChart && <FinancialResultSummary onBackChange={this.onBackChange} chartData={chartData} resultData={resultData}
         displayChart={displayChart} financialChart={showFinancialChart} financialResult={showFinancialResult}>
-        </FinancialResultSummary>
+        </FinancialResultSummary>}
       </div>
     );
   }
