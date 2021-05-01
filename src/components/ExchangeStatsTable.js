@@ -32,8 +32,7 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-class StatisticsTable extends React.Component {
-  state = {};
+class ExchangeStatsTable extends React.Component {
 
   render() {
     const { handleBack, classes, data } = this.props;
@@ -84,4 +83,4 @@ class StatisticsTable extends React.Component {
   }
 }
 
-export default withStyles(styles)(StatisticsTable);
+export default withStyles(styles)(ExchangeStatsTable);

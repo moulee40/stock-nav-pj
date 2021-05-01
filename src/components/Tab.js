@@ -5,7 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Overview from './Overview';
-import Statistics from './Statistics';
+import ExchangeStats from './ExchangeStats';
 import Analysis from './Analysis';
 import Financial from './Financial';
 
@@ -52,7 +52,7 @@ class SimpleTabs extends React.Component {
           </Tabs>
         </AppBar>
         {value === 0 && <Overview/>}
-        {value === 1 && <Statistics/>}
+        {value === 1 && <ExchangeStats/>}
         {value === 2 && <Analysis/>}
         {value === 3 && <Financial/>}
       </div>

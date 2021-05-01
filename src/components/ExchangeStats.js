@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import StatisticsTable from "./StatisticsTable";
+import ExchangeStatsTable from "./ExchangeStatsTable";
 import { Input } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import NativeSelect from "@material-ui/core/NativeSelect";
@@ -34,45 +34,45 @@ const styles = (theme) => ({
 
 const statisticsBaseUrl = "http://localhost:8080/stockapp/getStatisticsDetail/";
 
-class Statistics extends React.Component {
+class ExchangeStats extends React.Component {
   state = {
-    count: 10,
-    exchangeValue: "ALL",
+    displayCount: 10,
+    exchangeStatValue: "ALL",
     shouldDisplayTable: false,
-    symbol: "",
-    errorMessage: "",
-    statisticsTableData: [],
+    stockCode: "",
+    alertMessage: "",
+    exchangeStatTableData: [],
   };
 
-  handleDisplayChange = (event) => {
-    this.setState({ count: event.target.value });
+  handleDisplayCountChange = (event) => {
+    this.setState({ displayCount: event.target.value });
   };
 
-  handleExchangeRadioButton = (event) => {
-    this.setState({ exchangeValue: event.target.value });
+  handleExchangeStatRadioButton = (event) => {
+    this.setState({ exchangeStatValue: event.target.value });
   };
 
-  handleSubmit = (event) => {
-    const { symbol, count, exchangeValue } = this.state;
-    if (symbol === "") {
+  handleSubmitClick = (event) => {
+    const { stockCode, displayCount, exchangeStatValue } = this.state;
+    if (stockCode === "") {
       this.setState({
-        errorMessage: "Please enter the Symbol and click Submit",
+        alertMessage: "Please enter the Stock Code and click Submit",
       });
     } else {
       const params = {
-        pastDaysCount: count,
-        exchange: exchangeValue,
+        pastDaysCount: displayCount,
+        exchange: exchangeStatValue,
       };
-      axios.get(`${statisticsBaseUrl}${symbol}`, { params }).then((res) => {
+      axios.get(`${statisticsBaseUrl}${stockCode}`, { params }).then((res) => {
         if (res.data.error) {
           this.setState({
-            errorMessage: res.data.error,
+            alertMessage: res.data.error,
           });
         } else {
           this.setState({
-            statisticsTableData: res.data.statisticsDetail,
+            exchangeStatTableData: res.data.statisticsDetail,
             shouldDisplayTable: true,
-            errorMessage: "",
+            alertMessage: "",
           });
         }
       });
@@ -83,19 +83,19 @@ class Statistics extends React.Component {
     this.setState({ shouldDisplayTable: false });
   };
 
-  handleSymbolInputChange = (event) => {
+  handleStockCodeInputChange = (event) => {
     const inputValue = event.target.value;
-    this.setState({ symbol: inputValue, errorMessage: "" });
+    this.setState({ stockCode: inputValue, alertMessage: "" });
   };
 
   render() {
     const { classes } = this.props;
     const {
-      exchangeValue,
+      exchangeStatValue,
       shouldDisplayTable,
-      symbol,
-      errorMessage,
-      statisticsTableData,
+      stockCode,
+      alertMessage,
+      exchangeStatTableData,
     } = this.state;
     return (
       <div className="flex ml-2 flex-grow shadow-xl">
@@ -107,8 +107,8 @@ class Statistics extends React.Component {
                 className="ml-6 mt-5"
                 aria-label="exchange"
                 name="exchange1"
-                value={exchangeValue}
-                onChange={this.handleExchangeRadioButton}
+                value={exchangeStatValue}
+                onChange={this.handleExchangeStatRadioButton}
               >
                 <FormControlLabel
                   value="ALL"
@@ -137,7 +137,7 @@ class Statistics extends React.Component {
               <FormControl className={classes.formControl}>
                 <NativeSelect
                   defaultValue={10}
-                  onChange={this.handleDisplayChange}
+                  onChange={this.handleDisplayCountChange}
                 >
                   <option value={10}>Last 10 Days</option>
                   <option value={100}>Last 100 Days</option>
@@ -147,34 +147,34 @@ class Statistics extends React.Component {
             </div>
 
             <div className="flex items-center mt-3">
-              <span className="text-xl mr-4">Symbol</span>
+              <span className="text-xl mr-4">Stock Code</span>
               <Input
                 classes={{ root: classes.root_input }}
-                value={symbol}
+                value={stockCode}
                 autoFocus
                 disableUnderline
-                onChange={this.handleSymbolInputChange}
+                onChange={this.handleStockCodeInputChange}
               />
               <Button
                 variant="contained"
                 color="primary"
-                onClick={this.handleSubmit}
+                onClick={this.handleSubmitClick}
               >
                 Submit
               </Button>
             </div>
-            {errorMessage !== "" && (
+            {alertMessage !== "" && (
               <Alert className="mt-5" severity="warning">
-                {errorMessage}
+                {alertMessage}
               </Alert>
             )}
           </div>
         )}
         {shouldDisplayTable && (
           <div className="flex flex-col justify-center mt-10 space-y-2">
-            <StatisticsTable
+            <ExchangeStatsTable
               handleBack={this.handleBack}
-              data={statisticsTableData}
+              data={exchangeStatTableData}
             />
           </div>
         )}
@@ -183,4 +183,4 @@ class Statistics extends React.Component {
   }
 }
 
-export default withStyles(styles)(Statistics);
+export default withStyles(styles)(ExchangeStats);
