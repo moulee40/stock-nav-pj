@@ -1,5 +1,5 @@
 import React from "react";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles,ThemeProvider,createMuiTheme } from "@material-ui/core/styles";
 import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
 import Radio from "@material-ui/core/Radio";
@@ -10,6 +10,8 @@ import { Input } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import axios from "axios";
+import { grey } from '@material-ui/core/colors';
+import TextField from '@material-ui/core/TextField';
 
 const styles = (theme) => ({
   root: {
@@ -28,6 +30,16 @@ const styles = (theme) => ({
     height: "40px",
     marginRight: "18px",
   },
+  root_textfield:{
+    marginRight: "14px"
+  }
+});
+
+const theme = createMuiTheme({
+  palette: {
+    primary: grey,
+  },
+
 });
 
 //eg:http://localhost:8080/stockapp/getStatisticsDetail/AAPL?pastDaysCount=5&exchange=NASDAQ
@@ -56,7 +68,7 @@ class ExchangeStats extends React.Component {
     const { stockCode, displayCount, exchangeStatValue } = this.state;
     if (stockCode === "") {
       this.setState({
-        alertMessage: "Please enter the Stock Code and click Submit",
+        alertMessage: "Please enter the Stock Code",
       });
     } else {
       const params = {
@@ -101,7 +113,7 @@ class ExchangeStats extends React.Component {
       <div className="flex ml-2 flex-grow">
         {!shouldDisplayTable && (
           <div className="flex flex-col ml-14 mt-10 ">
-            <p className="text-2xl font-semibold text-indigo-900">Exchange</p>
+            <p className="text-3xl font-semibold text-gray-700">Exchange</p>
             <FormControl component="fieldset">
               <RadioGroup
                 className="ml-6 mt-5"
@@ -112,28 +124,28 @@ class ExchangeStats extends React.Component {
               >
                 <FormControlLabel
                   value="ALL"
-                  control={<Radio color="primary" />}
+                  control={<Radio color="default" />}
                   label="ALL"
                 />
                 <FormControlLabel
                   value="AMEX"
-                  control={<Radio color="primary" />}
+                  control={<Radio color="default" />}
                   label="AMEX"
                 />
                 <FormControlLabel
                   value="NYSE"
-                  control={<Radio color="primary" />}
+                  control={<Radio color="default" />}
                   label="NYSE"
                 />
                 <FormControlLabel
                   value="NASDAQ"
-                  control={<Radio color="primary" />}
+                  control={<Radio color="default" />}
                   label="NASDAQ"
                 />
               </RadioGroup>
             </FormControl>
             <div className="flex items-center mt-1">
-              <p className="text-xl">Display</p>
+              <p className="text-xl">Range</p>
               <FormControl className={classes.formControl}>
                 <NativeSelect
                   defaultValue={10}
@@ -147,24 +159,25 @@ class ExchangeStats extends React.Component {
             </div>
 
             <div className="flex items-center mt-3">
-              <span className="text-xl mr-4">Stock Code</span>
-              <Input
-                classes={{ root: classes.root_input }}
-                value={stockCode}
-                autoFocus
-                disableUnderline
+            <ThemeProvider theme={theme}>
+            <TextField
                 onChange={this.handleStockCodeInputChange}
-              />
+                value={stockCode}
+                className={classes.root_textfield}
+                label="Stock Code"
+                variant="outlined"
+             />
+             </ThemeProvider>
               <Button
+              size="large"
                 variant="contained"
-                color="primary"
                 onClick={this.handleSubmitClick}
               >
                 Submit
               </Button>
             </div>
             {alertMessage !== "" && (
-              <Alert className="mt-5" severity="warning">
+              <Alert className="mt-5" severity="error">
                 {alertMessage}
               </Alert>
             )}
