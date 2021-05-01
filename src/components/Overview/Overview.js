@@ -1,15 +1,17 @@
 import React from "react";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles,ThemeProvider,createMuiTheme } from "@material-ui/core/styles";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import TextField from '@material-ui/core/TextField';
 import { Input } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import OverviewTable from "./OverviewTable";
 import Alert from "@material-ui/lab/Alert";
 import axios from "axios";
+import { grey } from '@material-ui/core/colors';
 
 const styles = (theme) => ({
   root: {
@@ -24,6 +26,15 @@ const styles = (theme) => ({
     color: "grey",
     height: "40px",
     marginRight: "18px",
+  },
+  root_textfield:{
+    marginRight: "14px"
+  }
+});
+
+const theme = createMuiTheme({
+  palette: {
+    primary: grey,
   },
 });
 
@@ -43,7 +54,7 @@ class Overview extends React.Component {
     const { stockCode } = this.state;
     if (stockCode === "") {
       this.setState({
-        alertMessage: "Please enter the Stock Code and click Submit",
+        alertMessage: "Please enter the Stock Code",
       });
     } else {
       axios.get(`${summaryBaseUrl}${stockCode}`).then((res) => {
@@ -95,7 +106,7 @@ class Overview extends React.Component {
       <div className="flex ml-2 flex-grow">
         {!shouldDisplayTable && (
           <div className="flex flex-col ml-14 mt-10">
-            <p className="text-2xl font-semibold text-indigo-900">
+            <p className="text-3xl font-semibold text-gray-700">
               Information
             </p>
             <FormControl component="fieldset">
@@ -106,7 +117,7 @@ class Overview extends React.Component {
                       checked={shouldHighestPriceChecked}
                       onChange={this.handleChangeForCheckBox}
                       name="Highest Price"
-                      color="primary"
+                      color="default"
                     />
                   }
                   label="Highest Price"
@@ -117,7 +128,7 @@ class Overview extends React.Component {
                       checked={shouldHighestVolumeChecked}
                       onChange={this.handleChangeForCheckBox}
                       name="Highest Volume"
-                      color="primary"
+                      color="default"
                     />
                   }
                   label="Highest Volume"
@@ -126,24 +137,33 @@ class Overview extends React.Component {
               {/* <FormHelperText>Be careful</FormHelperText> */}
             </FormControl>
             <div className="flex items-center mt-6">
-              <p className="text-xl mr-4">Stock Code</p>
+            <ThemeProvider theme={theme}>
+            <TextField
+                onChange={this.handleStockCodeInputChange}
+                value={stockCode}
+                className={classes.root_textfield}
+                label="Stock Code"
+                variant="outlined"
+             />
+             </ThemeProvider>
+              {/* <p className="text-xl mr-4">Stock Code</p>
               <Input
                 classes={{ root: classes.root_input }}
                 value={stockCode}
                 autoFocus
                 disableUnderline
                 onChange={this.handleStockCodeInputChange}
-              />
+              /> */}
               <Button
+              size="large"
                 variant="contained"
-                color="primary"
                 onClick={this.handleSubmitClick}
               >
                 Submit
               </Button>
             </div>
             {alertMessage !== "" && (
-              <Alert className="mt-5" severity="warning">
+              <Alert className="mt-5" severity="error">
                 {alertMessage}
               </Alert>
             )}
