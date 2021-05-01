@@ -32,15 +32,15 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-class SummaryTable extends React.Component {
+class OverviewTable extends React.Component {
   state = {};
 
   render() {
     const {
       data,
       handleBack,
-      isHighestVolumeChecked,
-      isHighestPriceChecked,
+      shouldHighestVolumeChecked,
+      shouldHighestPriceChecked,
       classes,
     } = this.props;
     const summaryTableArray = [
@@ -49,11 +49,11 @@ class SummaryTable extends React.Component {
       { name: "Exchange", key: "exchange" },
       { name: "Start Date", key: "startDate" },
       { name: "End Date", key: "endDate" },
-      isHighestPriceChecked && {
+      shouldHighestPriceChecked && {
         name: "Highest Price and Date",
         key: "highestPriceAndDate",
       },
-      isHighestVolumeChecked && {
+      shouldHighestVolumeChecked && {
         name: "Highest Volume and Date",
         key: "highestVolumeAndDate",
       },
@@ -93,4 +93,4 @@ class SummaryTable extends React.Component {
   }
 }
 
-export default withStyles(styles)(SummaryTable);
+export default withStyles(styles)(OverviewTable);

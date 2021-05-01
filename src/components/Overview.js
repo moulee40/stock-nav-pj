@@ -7,7 +7,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import { Input } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import SummaryTable from "./SummaryTable";
+import OverviewTable from "./OverviewTable";
 import Alert from "@material-ui/lab/Alert";
 import axios from "axios";
 
@@ -29,41 +29,33 @@ const styles = (theme) => ({
 
 const summaryBaseUrl = "http://localhost:8080/stockapp/getSummaryDetail/";
 
-class Summary extends React.Component {
+class Overview extends React.Component {
   state = {
-    isHighestPriceChecked: false,
-    isHighestVolumeChecked: false,
-    symbol: "",
+    shouldHighestPriceChecked: false,
+    shouldHighestVolumeChecked: false,
+    stockCode: "",
     shouldDisplayTable: false,
-    summaryTableData: {},
-    errorMessage: "",
+    overviewTableData: {},
+    alertMessage: "",
   };
-
-  handleCheckBoxChange = (event) => {
-    if (event.target.name === "Highest Price") {
-      this.setState({ isHighestPriceChecked: event.target.checked });
-    } else {
-      this.setState({ isHighestVolumeChecked: event.target.checked });
-    }
-  };
-
-  handleSubmit = (event) => {
-    const { symbol } = this.state;
-    if (symbol === "") {
+  
+  handleSubmitClick = (event) => {
+    const { stockCode } = this.state;
+    if (stockCode === "") {
       this.setState({
-        errorMessage: "Please enter the Symbol and click Submit",
+        alertMessage: "Please enter the Stock Code and click Submit",
       });
     } else {
-      axios.get(`${summaryBaseUrl}${symbol}`).then((res) => {
+      axios.get(`${summaryBaseUrl}${stockCode}`).then((res) => {
         if (res.data.error) {
           this.setState({
-            errorMessage: res.data.error,
+            alertMessage: res.data.error,
           });
         } else {
           this.setState({
-            summaryTableData: res.data.summaryDetail,
+            overviewTableData: res.data.summaryDetail,
             shouldDisplayTable: true,
-            errorMessage: "",
+            alertMessage: "",
           });
         }
       });
@@ -74,19 +66,29 @@ class Summary extends React.Component {
     this.setState({ shouldDisplayTable: false });
   };
 
-  handleSymbolInputChange = (event) => {
-    const inputValue = event.target.value;
-    this.setState({ symbol: inputValue, errorMessage: "" });
+  handleChangeForCheckBox = (event) => {
+    if (event.target.name === "Highest Price") {
+      this.setState({ shouldHighestPriceChecked: event.target.checked });
+    } else {
+      this.setState({ shouldHighestVolumeChecked: event.target.checked });
+    }
   };
+  
+  handleStockCodeInputChange = (event) => {
+    const inputValue = event.target.value;
+    this.setState({ stockCode: inputValue, alertMessage: "" });
+  };
+
+
 
   render() {
     const {
-      isHighestPriceChecked,
-      isHighestVolumeChecked,
+      shouldHighestPriceChecked,
+      shouldHighestVolumeChecked,
       shouldDisplayTable,
-      summaryTableData,
-      errorMessage,
-      symbol,
+      overviewTableData,
+      alertMessage,
+      stockCode,
     } = this.state;
     const { classes } = this.props;
     return (
@@ -101,8 +103,8 @@ class Summary extends React.Component {
                 <FormControlLabel
                   control={
                     <Checkbox
-                      checked={isHighestPriceChecked}
-                      onChange={this.handleCheckBoxChange}
+                      checked={shouldHighestPriceChecked}
+                      onChange={this.handleChangeForCheckBox}
                       name="Highest Price"
                       color="primary"
                     />
@@ -112,8 +114,8 @@ class Summary extends React.Component {
                 <FormControlLabel
                   control={
                     <Checkbox
-                      checked={isHighestVolumeChecked}
-                      onChange={this.handleCheckBoxChange}
+                      checked={shouldHighestVolumeChecked}
+                      onChange={this.handleChangeForCheckBox}
                       name="Highest Volume"
                       color="primary"
                     />
@@ -124,36 +126,36 @@ class Summary extends React.Component {
               {/* <FormHelperText>Be careful</FormHelperText> */}
             </FormControl>
             <div className="flex items-center mt-6">
-              <p className="text-xl mr-4">Symbol</p>
+              <p className="text-xl mr-4">Stock Code</p>
               <Input
                 classes={{ root: classes.root_input }}
-                value={symbol}
+                value={stockCode}
                 autoFocus
                 disableUnderline
-                onChange={this.handleSymbolInputChange}
+                onChange={this.handleStockCodeInputChange}
               />
               <Button
                 variant="contained"
                 color="primary"
-                onClick={this.handleSubmit}
+                onClick={this.handleSubmitClick}
               >
                 Submit
               </Button>
             </div>
-            {errorMessage !== "" && (
+            {alertMessage !== "" && (
               <Alert className="mt-5" severity="warning">
-                {errorMessage}
+                {alertMessage}
               </Alert>
             )}
           </div>
         )}
         {shouldDisplayTable && (
           <div className="flex flex-col justify-center mt-10 space-y-2">
-            <SummaryTable
+            <OverviewTable
               handleBack={this.handleBack}
-              data={summaryTableData}
-              isHighestVolumeChecked={isHighestVolumeChecked}
-              isHighestPriceChecked={isHighestPriceChecked}
+              data={overviewTableData}
+              shouldHighestVolumeChecked={shouldHighestVolumeChecked}
+              shouldHighestPriceChecked={shouldHighestPriceChecked}
             />
           </div>
         )}
@@ -162,4 +164,4 @@ class Summary extends React.Component {
   }
 }
 
-export default withStyles(styles)(Summary);
+export default withStyles(styles)(Overview);
