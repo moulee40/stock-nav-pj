@@ -219,7 +219,8 @@ class StockAnalysis extends React.Component {
       stockQuarterAnalysisChart,stockTrendChart,stockPriceComparisonGraph} = this.state;
     const { classes } = this.props;
     return (
-      <div className="flex ml-2 flex-grow w-2/6 ">
+      <div>
+      <div className="flex ml-2 flex-grow w-2/6">
         {!displayChart && (
           <div className="flex flex-col ml-14 mt-10 flex-grow">
             <p className="text-3xl font-semibold text-gray-700">
@@ -356,12 +357,15 @@ class StockAnalysis extends React.Component {
             )}
           </div>
         )}
-        {displayChart && <DisplayChart onBackChange={this.onBackChange} display={displayChart}  stockQuarterAnalysisDisplay={stockQuarterAnalysisChart} 
+      </div>
+      <div className="flex ml-2 flex-grow">
+      {displayChart && <DisplayChart onBackChange={this.onBackChange} display={displayChart}  stockQuarterAnalysisDisplay={stockQuarterAnalysisChart} 
         stockTrendDisplay={stockTrendChart} stockPriceComparisonDisplay={stockPriceComparisonGraph} 
         stockQuarterAnalysisdata={stockQuarterAnalysisResult} fiftyDaysAverage={fiftyDaysSelected}
         twoHundredDaysAverage={twoHundredDaysSelected}  stockTrendData={stockTrendResult}
         stockSymbolData1={stockSymbol1Result} stockSymbolData2={stockSymbol2Result}></DisplayChart>}
-      </div>
+        </div>
+    </div> 
     );
   }
 }

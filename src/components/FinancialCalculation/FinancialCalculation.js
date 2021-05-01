@@ -277,22 +277,6 @@ class FinancialCalculation extends React.Component {
             )}
           </div>
         )}
-        {/* {displayChart && showFinancialChart && (
-          <div className="flex flex-col justify-center mt-10 space-y-2 w-2/4">
-            <FinancialCalculationChart
-              onBackChange={this.onBackChange}
-              data={chartData}
-            />
-          </div>
-        )}
-        {displayChart && showFinancialResult && (
-          <div className="flex flex-col justify-center mt-10 space-y-2 w-2/4">
-            <FinancialCalculationResult
-              onBackChange={this.onBackChange}
-              data={resultData}
-            />
-          </div>
-        )} */}
         <FinancialResultSummary onBackChange={this.onBackChange} chartData={chartData} resultData={resultData}
         displayChart={displayChart} financialChart={showFinancialChart} financialResult={showFinancialResult}>
         </FinancialResultSummary>
