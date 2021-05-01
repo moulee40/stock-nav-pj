@@ -15,6 +15,7 @@ const styles = theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
     display: 'flex',
+    height: '88vh'
     
   },
   appBar_root:{

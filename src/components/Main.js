@@ -8,7 +8,7 @@ class Main extends React.Component {
   }
   render() {
     return (
-      <div className="space-y-3 h-screen flex flex-col">
+      <div className="space-y-3 flex flex-col">
         <p className="text-4xl font-semibold text-indigo-900 text-center shadow-md py-5">
           ABM Finance Home
         </p>

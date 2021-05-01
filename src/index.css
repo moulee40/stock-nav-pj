@@ -1,4 +1,18 @@
 
 @tailwind base;
 @tailwind components;
+
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    min-height: 100vh;
+    display: flex;
+  }
+
+  #root{
+      flex-grow: 1;
+  }
+
 @tailwind utilities;
