@@ -59,7 +59,7 @@ class OverviewTable extends React.Component {
       },
     ];
     return (
-      <div className="space-y-12">
+      <div className="space-y-12 ml-14">
         <p
           className="max-w-min cursor-pointer underline text-2xl text-indigo-900 hover:text-purple-800"
           onClick={handleBack}

@@ -3,7 +3,7 @@ import Main from './components/Main'
 
 function App() {
   return (
-    <div className="m-2 h-screen max-h-screen">
+    <div className="m-2">
       <Main/>
     </div>
   );

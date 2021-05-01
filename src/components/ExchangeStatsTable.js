@@ -38,7 +38,7 @@ class ExchangeStatsTable extends React.Component {
     const { handleBack, classes, data } = this.props;
 
     return (
-      <div className="space-y-6">
+      <div className="space-y-6 ml-14">
         <p
           className="max-w-min cursor-pointer underline text-2xl text-indigo-900 hover:text-purple-800"
           onClick={handleBack}

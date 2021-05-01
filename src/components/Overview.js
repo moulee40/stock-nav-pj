@@ -92,7 +92,7 @@ class Overview extends React.Component {
     } = this.state;
     const { classes } = this.props;
     return (
-      <div className="flex ml-2 flex-grow shadow-xl">
+      <div className="flex ml-2 flex-grow shadow-md">
         {!shouldDisplayTable && (
           <div className="flex flex-col ml-14 mt-10">
             <p className="text-2xl font-semibold text-indigo-900">
