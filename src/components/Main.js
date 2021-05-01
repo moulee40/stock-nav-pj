@@ -1,6 +1,6 @@
 import React from "react";
 import Tab from "./Tab";
-
+import MenuItems from "./MenuItems";
 class Main extends React.Component {
   constructor(props) {
     super(props);
@@ -8,11 +8,15 @@ class Main extends React.Component {
   }
   render() {
     return (
-      <div className="space-y-5 h-screen flex flex-col">
-        <h2 className="text-4xl font-semibold text-indigo-900">
-          UCM Finance Home
-        </h2>
+      <div className="space-y-3 h-screen flex flex-col">
+        <p className="text-4xl font-semibold text-indigo-900 text-center shadow-md py-5">
+          ABM Finance Home
+        </p>
         <Tab />
+        {/* <div className="flex flex-grow">
+          <div className="w-1/4"><MenuItems/></div>
+          <div className="flex-grow">Menu Contents</div>
+        </div> */}
       </div>
     );
   }
