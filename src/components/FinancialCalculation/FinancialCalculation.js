@@ -3,7 +3,6 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import axios from "axios";
 import Alert from "@material-ui/lab/Alert";
-import { Input } from "@material-ui/core";
 import { withStyles,ThemeProvider,createMuiTheme } from "@material-ui/core/styles";
 import FinancialResultSummary from "./FinancialResultSummary";
 import { grey } from '@material-ui/core/colors';
@@ -185,49 +184,6 @@ class FinancialCalculation extends React.Component {
       <div className="flex ml-2 flex-grow">
         {!displayChart && (
           <div className="flex flex-col ml-14 mt-10 ">
-            {/* <p className="text-3xl font-semibold text-gray-700">
-              Financial Chart Result
-            </p>
-            <div className="flex  ml-6 mt-5">
-              <form className={classes.form_input} noValidate>
-                <span className="text-xl mr-7">From</span>
-                <TextField
-                  id="date"
-                  type="date"
-                  defaultValue="1998-08-08"
-                  className={classes.text_input}
-                  onChange={this.chartFromDateChange}
-                />
-              </form>
-              <form className={classes.form_input} noValidate>
-                <span className="text-xl mr-4">To</span>
-                <TextField
-                  id="date"
-                  type="date"
-                  defaultValue="2004-07-20"
-                  className={classes.text_input}
-                  onChange={this.chartToDateChange}
-                />
-              </form>
-            </div>
-            <div className="ml-6 mt-6 flex items-center">
-            <ThemeProvider theme={theme}>
-            <TextField
-                onChange={this.chartInputChange}
-                value={chartInput}
-                className={classes.root_textfield}
-                label="Stock Code"
-                variant="outlined"
-             />
-             </ThemeProvider>
-              <Button
-                variant="contained"
-                size="large"
-                onClick={this.financialChart}
-              >
-                Submit
-              </Button>
-            </div> */}
             <p className="text-2xl font-semibold text-gray-700 ">
               Financial Result Summary
             </p>
