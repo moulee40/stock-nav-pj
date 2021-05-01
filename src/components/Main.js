@@ -1,6 +1,5 @@
 import React from "react";
 import Tab from "./Tab";
-import MenuItems from "./MenuItems";
 class Main extends React.Component {
   constructor(props) {
     super(props);

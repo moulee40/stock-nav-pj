@@ -215,7 +215,7 @@ class StockAnalysis extends React.Component {
               Quarter Analysis
             </p>
             <div className="mt-5 ml-6 flex items-center">
-              <span className="text-xl mr-4">Symbol Code</span>
+              <span className="text-xl mr-4">Stock Code</span>
               <Input
                 classes={{ root: classes.input }}
                 value={stockQuarterAnalysisInput}
@@ -275,7 +275,7 @@ class StockAnalysis extends React.Component {
                 />
               </FormGroup>
               <div className="flex items-center mt-4">
-                <span className="text-xl mr-4 ml-6">Symbol Code</span>
+                <span className="text-xl mr-4 ml-6">Stock Code</span>
                 <Input
                   classes={{ root: classes.input }}
                   value={stockTrendInput}
@@ -296,7 +296,7 @@ class StockAnalysis extends React.Component {
               Stock Comparison
             </p>
             <div className="flex items-center mt-5 ml-6">
-              <span className="text-xl mr-4">Symbol Code 1</span>
+              <span className="text-xl mr-4">Stock Code 1</span>
               <Input
                 classes={{ root: classes.input }}
                 value={stockSymbol1Input}
@@ -306,7 +306,7 @@ class StockAnalysis extends React.Component {
               />
             </div>
             <div className="flex items-center mt-4 ml-6">
-              <span className="text-xl mr-4">Symbol Code 2</span>
+              <span className="text-xl mr-4">Stock Code 2</span>
               <Input
                 classes={{ root: classes.input }}
                 value={stockSymbol2Input}
