@@ -1,12 +1,10 @@
 import React from "react";
 import { withStyles,ThemeProvider,createMuiTheme } from "@material-ui/core/styles";
-import FormLabel from "@material-ui/core/FormLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import TextField from '@material-ui/core/TextField';
-import { Input } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import OverviewTable from "./OverviewTable";
 import Alert from "@material-ui/lab/Alert";
@@ -134,7 +132,6 @@ class Overview extends React.Component {
                   label="Highest Volume"
                 />
               </FormGroup>
-              {/* <FormHelperText>Be careful</FormHelperText> */}
             </FormControl>
             <div className="flex items-center mt-6">
             <ThemeProvider theme={theme}>
@@ -146,14 +143,6 @@ class Overview extends React.Component {
                 variant="outlined"
              />
              </ThemeProvider>
-              {/* <p className="text-xl mr-4">Stock Code</p>
-              <Input
-                classes={{ root: classes.root_input }}
-                value={stockCode}
-                autoFocus
-                disableUnderline
-                onChange={this.handleStockCodeInputChange}
-              /> */}
               <Button
               size="large"
                 variant="contained"
