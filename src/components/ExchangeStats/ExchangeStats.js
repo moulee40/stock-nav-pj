@@ -6,7 +6,6 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import ExchangeStatsTable from "./ExchangeStatsTable";
-import { Input } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import axios from "axios";
